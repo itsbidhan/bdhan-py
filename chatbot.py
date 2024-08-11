@@ -14,25 +14,21 @@ def chatbot():
         user_input = input("You: ").strip().lower()
 
         if any(phrase in user_input for phrase in ['how are you', "what's up", 'how do you do']):
-
             print("Chatbot: I'm doing well, thank you! How can I assist you today?\n")
 
         elif any(phrase in user_input for phrase in ['what can you do', 'what are your capabilities', 'what can you do for me']):
             print("Chatbot: I can answer basic questions and help you with common queries. Just ask!\n")
 
         elif any(phrase in user_input for phrase in ['thank you', 'thanks', 'thanks a lot']):
-
             print("Chatbot: You're welcome! If you have more questions, feel free to ask.\n")
 
         elif any(phrase in user_input for phrase in ['goodbye', 'bye', 'see you later']):
-
             print("Chatbot: Goodbye! Have a great day.\n")
             break
 
         elif any(phrase in user_input for phrase in ['what is the time', 'what time is it']):
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
-
             print(f"Chatbot: The current time is {current_time}.\n")
 
         elif any(phrase in user_input for phrase in ['what is the date', 'what day is it']):
@@ -41,11 +37,11 @@ def chatbot():
             print(f"Chatbot: Today's date is {current_date}.\n")
 
         elif any(phrase in user_input for phrase in ['tell me a joke', 'can you make me laugh']):
+            print("Chatbot: Why was six afraid of seven?")
+            print("User: Why?")
+            print("Chatbot: Because seven eight (ate) nine!\n")
             
-print("Chatbot:Why was six afraid of seven?\nUser: Why?\nChatbot: Because seven eight (ate) nine!\n")
-
         else:
-
             print("Chatbot: I'm not sure how to respond to that. Please ask something from the options above.\n")
 
 chatbot()

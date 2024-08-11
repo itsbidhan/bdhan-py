@@ -1,34 +1,58 @@
-graph = {
-    'A': ['B', 'C'],
-    'B': ['D', 'E'],
-    'C': ['F'],
-    'D': ['G', 'H'],
-    'E': ['I'],
-    'F': [],
-    'G': [],
-    'H': [],
-    'I': []
-}
+from collections import deque
 
-visited = []  # List for visited nodes.
-queue = []  # Initialize a queue
+print("This program uses Breadth-First Search (BFS) to find the path in a tree structure.")
 
+def bfs_path(graph, start, goal):
+    # Initialize the queue with the start node and its path
+    queue = deque([(start, [start])])
+    
+    # Set to track visited nodes
+    visited = set([start])
+    
+    while queue:
+        current_node, path = queue.popleft()
+        
+        # Check if we reached the goal
+        if current_node == goal:
+            return path
+        
+        # Explore neighbors
+        for neighbor in graph.get(current_node, []):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append((neighbor, path + [neighbor]))
+    
+    return None  
 
-def bfs(visited, graph, node):  # function for BFS
-    visited.append(node)
-    queue.append(node)
+def get_user_input():
+    graph = {}
+    
+    print("\nEnter the tree structure (type 'done' when finished):")
+    
+    while True:
+        node = input("Enter node (or 'done' to finish): ").strip()
+        if node.lower() == 'done':
+            break
+        
+        children = input(f"Enter children of node '{node}' (space-separated): ").strip()
+        graph[node] = children.split() if children else []
+    
+    return graph
 
-    while queue:          # Creating loop to visit each node
-        m = queue.pop(0)
-        # print '->' after each node except the last one
-        print(m, end='->' if m != 'I' else '')
+def main():
+    graph = get_user_input()
+    
+    start_node = input("\nEnter the start node: ").strip()
+    goal_node = input("Enter the goal node: ").strip()
+    
+    path = bfs_path(graph, start_node, goal_node)
+    
+    
+    if path:
+        print("\nPath to goal node:", " -> ".join(path))
+    
+    else:
+        print("No path found to the goal node.")
 
-        for neighbour in graph[m]:
-            if neighbour not in visited:
-                visited.append(neighbour)
-                queue.append(neighbour)
-
-
-# Driver Code
-print("Following is the Breadth-First Search")
-bfs(visited, graph, 'A')
+if __name__ == "__main__":
+    main()
