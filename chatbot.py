@@ -1,32 +1,51 @@
-"""
-Simple Python Chatbot with Options Display
-"""
-
-def display_options():
-    print("Hello! I'm a simple chatbot. Here are some things you can ask me:")
-    print("1. Say 'hello' or 'hi'")
-    print("2. Ask 'how are you?'")
-    print("3. Ask about my name ('what's your name?' or 'your name')")
-    print("4. Type 'bye' or 'exit' to end the chat")
-    print("Let's chat!")
+from datetime import datetime
 
 def chatbot():
-    display_options()
-    
-    while True:
-        user_input = input("You: ").lower()
-        
-        if "hello" in user_input or "hi" in user_input:
-            print("Chatbot: Hello! How can I assist you?")
-        elif "how are you" in user_input:
-            print("Chatbot: I'm just a program, so I don't have feelings, but thanks for asking!")
-        elif "your name" in user_input:
-            print("Chatbot: I'm a simple chatbot created to assist you.")
-        elif "bye" in user_input or "exit" in user_input:
-            print("Chatbot: Goodbye! Have a great day!")
-            break
-        else:
-            print("Chatbot: I'm sorry, I didn't understand that. Can you rephrase?")
+    print("Namaste! I am your chatbot. You can ask me the following:")
+    print("1. 'How are you?' or 'What's up?'")
+    print("2. 'What can you do?' or 'What are your capabilities?'")
+    print("3. 'Thank you!' or 'Thanks!'")
+    print("4. 'Goodbye' or 'Bye'")
+    print("5. 'What is the time?' or 'What time is it?'")
+    print("6. 'What is the date?' or 'What day is it?'")
+    print("7. 'Tell me a joke' or 'Can you make me laugh?'\n")
 
-# Start the chatbot
+    while True:
+        user_input = input("You: ").strip().lower()
+
+        if any(phrase in user_input for phrase in ['how are you', "what's up", 'how do you do']):
+
+            print("Chatbot: I'm doing well, thank you! How can I assist you today?\n")
+
+        elif any(phrase in user_input for phrase in ['what can you do', 'what are your capabilities', 'what can you do for me']):
+            print("Chatbot: I can answer basic questions and help you with common queries. Just ask!\n")
+
+        elif any(phrase in user_input for phrase in ['thank you', 'thanks', 'thanks a lot']):
+
+            print("Chatbot: You're welcome! If you have more questions, feel free to ask.\n")
+
+        elif any(phrase in user_input for phrase in ['goodbye', 'bye', 'see you later']):
+
+            print("Chatbot: Goodbye! Have a great day.\n")
+            break
+
+        elif any(phrase in user_input for phrase in ['what is the time', 'what time is it']):
+            now = datetime.now()
+            current_time = now.strftime("%H:%M:%S")
+
+            print(f"Chatbot: The current time is {current_time}.\n")
+
+        elif any(phrase in user_input for phrase in ['what is the date', 'what day is it']):
+            today = datetime.now()
+            current_date = today.strftime("%Y-%m-%d")
+            print(f"Chatbot: Today's date is {current_date}.\n")
+
+        elif any(phrase in user_input for phrase in ['tell me a joke', 'can you make me laugh']):
+            
+print("Chatbot:Why was six afraid of seven?\nUser: Why?\nChatbot: Because seven eight (ate) nine!\n")
+
+        else:
+
+            print("Chatbot: I'm not sure how to respond to that. Please ask something from the options above.\n")
+
 chatbot()

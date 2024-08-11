@@ -1,45 +1,41 @@
-'''
-Program to solve the water jug problem using state space search
-'''
+def water_jug_problem(x, y, z):
+    jug1, jug2 = 0, 0  
 
-j1 = 0
-j2 = 0
-x = 4
-y = 3
-print("Initial state: (0, 0)")
-print("Capacities: (4, 3)")
-print("Goal state: (2, 0 or any number)")
+    print(f"Goal: Measure exactly {z} liters using two jugs with capacities {x} and {y}.")
+    print("\nOptions:")
+    print("1. Fill Jug 1")
+    print("2. Fill Jug 2")
+    print("3. Empty Jug 1")
+    print("4. Empty Jug 2")
+    print("5. Pour Jug 1 into Jug 2")
+    print("6. Pour Jug 2 into Jug 1")
+    
+    while jug1 != z and jug2 != z:
+        print(f"\nJug 1: {jug1}/{x} liters, Jug 2: {jug2}/{y} liters")
+        choice = int(input("Choose an action (1-6): "))
+        
+        if choice == 1:
+            jug1 = x
+        elif choice == 2:
+            jug2 = y
+        elif choice == 3:
+            jug1 = 0
+        elif choice == 4:
+            jug2 = 0
+        elif choice == 5:
+            jug2 += jug1
+            jug1 = 0 if jug2 <= y else jug2 - y
+            jug2 = min(jug2, y)
+        elif choice == 6:
+            jug1 += jug2
+            jug2 = 0 if jug1 <= x else jug1 - x
+            jug1 = min(jug1, x)
+        else:
+            print("Invalid choice. Please try again.")
+    print(f"\nJug 1: {jug1}/{x} liters, Jug 2: {jug2}/{y} liters")
+    print(f"Congratulations! You've measured exactly {z} liters.")
 
-while j1 != 2:
-    r = int(input("Enter the rule: "))
-    if (r == 1):
-        j1 = x
-    elif (r == 2):
-        j2 = y
-    elif (r == 3):
-        j1 = 0
-    elif (r == 4):
-        j2 = 0
-    elif (r == 5):
-        t = y-j2
-        j2 = y
-        j1 -= t
-        if j1 < 0:
-            j1 = 0
-    elif (r == 6):
-        t = x-j1
-        j1 = x
-        j2 -= t
-        if j2 < 0:
-            j2 = 0
-    elif (r == 7):
-        j2 += j1
-        j1 = 0
-        if j2 > y:
-            j2 = y
-    elif (r == 8):
-        j1 += j2
-        j2 = 0
-        if j1 > x:
-            j1 = x
-    print(j1, j2)
+x = int(input("Enter the capacity of Jug 1: "))
+y = int(input("Enter the capacity of Jug 2: "))
+z = int(input("Enter the target amount of water to measure: "))
+water_jug_problem(x, y, z)
